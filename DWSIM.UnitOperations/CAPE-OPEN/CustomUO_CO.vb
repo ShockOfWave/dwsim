@@ -1,4 +1,4 @@
-﻿'    Python Script Unit Operation CAPE-OPEN Wrapper
+'    Python Script Unit Operation CAPE-OPEN Wrapper
 '    Copyright 2016-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -20,7 +20,9 @@
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
@@ -224,7 +226,9 @@ Namespace UnitOperations.CAPEOPENWrappers
                     scope = Nothing
                     source = Nothing
                     _lastrun = "Error executing script: " & ops.FormatException(ex).ToString
+#If Not HEADLESS Then
                     MessageBox.Show(_lastrun, Me.ComponentName)
+#End If
                     Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
 
                 Finally
@@ -257,12 +261,16 @@ Namespace UnitOperations.CAPEOPENWrappers
 
                     Try
 
+                        #If Not HEADLESS Then
                         GlobalSettings.Settings.InitializePythonEnvironment()
+                        #End If
 
                     Catch ex As Exception
 
                         _lastrun = "Error executing script: " & ex.ToString()
+#If Not HEADLESS Then
                         MessageBox.Show(_lastrun, Me.ComponentName)
+#End If
                         Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
 
                     End Try
@@ -305,7 +313,9 @@ Namespace UnitOperations.CAPEOPENWrappers
                         Catch ex As Exception
 
                             _lastrun = "Error executing script: " & ex.ToString()
+#If Not HEADLESS Then
                             MessageBox.Show(_lastrun, Me.ComponentName)
+#End If
                             Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
 
                         Finally
@@ -323,6 +333,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub Edit()
 
             Dim edform As New EditingForm_CustomUO_ScriptEditor
@@ -352,6 +363,7 @@ Namespace UnitOperations.CAPEOPENWrappers
             edform = Nothing
 
         End Sub
+        #End If
 
         Public Overrides Sub ProduceReport(ByRef report As String)
             report = _lastrun

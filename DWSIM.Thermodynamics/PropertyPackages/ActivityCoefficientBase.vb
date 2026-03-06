@@ -66,6 +66,7 @@ Namespace PropertyPackages
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If GlobalSettings.Settings.CAPEOPENMode Then
@@ -77,12 +78,15 @@ Namespace PropertyPackages
             End If
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfigPropertyPackage() With {._form = Me.Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
 
         End Function
+        #End If
 
 #End Region
 

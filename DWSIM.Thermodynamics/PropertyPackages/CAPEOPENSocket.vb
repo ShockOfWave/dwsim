@@ -91,6 +91,7 @@ Namespace PropertyPackages
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If Me._phasemappings Is Nothing Then CreatePhaseMappings()
@@ -99,12 +100,15 @@ Namespace PropertyPackages
             f.Show()
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfigCAPEOPENPPSocket() With {.pp = Me, ._form = Flowsheet}
 
         End Function
+        #End If
 
         Public Overrides Function Clone() As PropertyPackage
 
@@ -1307,9 +1311,11 @@ Namespace PropertyPackages
             Return CType(_copp, ICapeThermoPropertyPackage).ValidityCheck(materialObject, props)
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub Edit()
             CType(_copp, ICapeUtilities).Edit()
         End Sub
+        #End If
 
         Public Overrides Sub Initialize()
             If Not _copp Is Nothing Then CType(_copp, ICapeUtilities).Initialize()

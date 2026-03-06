@@ -1,4 +1,4 @@
-﻿using DWSIM.ExtensionMethods;
+using DWSIM.ExtensionMethods;
 using DWSIM.GlobalSettings;
 using DWSIM.Interfaces;
 using ICSharpCode.SharpZipLib.Zip;
@@ -11,9 +11,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+#if !HEADLESS
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
 using unvell.ReoGrid.Formula;
+#endif
 using static DWSIM.Interfaces.Enums.Scripts;
 
 namespace DWSIM.Automation
@@ -26,13 +28,18 @@ namespace DWSIM.Automation
 
         private Action updateUIaction;
 
+#if !HEADLESS
         private IWorkbook Spreadsheet;
+#else
+        private object Spreadsheet;
+#endif
 
         public override bool SupressMessages { get; set; } = false;
 
         public Flowsheet2(Action<string, IFlowsheet.MessageType> messageListener, Action updateUIhandler)
         {
 
+#if !HEADLESS
             GetSpreadsheetObjectFunc = () => Spreadsheet;
 
             LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
@@ -88,6 +95,24 @@ namespace DWSIM.Automation
             {
                 return GetSpreadsheetFormatFromRange(range);
             });
+#else
+            // Headless mode: spreadsheet functionality disabled (ReoGrid requires WinForms)
+            GetSpreadsheetObjectFunc = () => null;
+
+            LoadSpreadsheetData = new Action<XDocument>((xdoc) => { });
+
+            SaveSpreadsheetData = new Action<XDocument>((xdoc) => { });
+
+            RetrieveSpreadsheetData = new Func<string, List<string[]>>((range) =>
+            {
+                return new List<string[]>();
+            });
+
+            RetrieveSpreadsheetFormat = new Func<string, List<string[]>>((range) =>
+            {
+                return new List<string[]>();
+            });
+#endif
 
             DynamicsManager.RunSchedule = (schname) =>
             {
@@ -101,6 +126,7 @@ namespace DWSIM.Automation
 
         }
 
+#if !HEADLESS
         private List<string[]> GetSpreadsheetDataFromRange(string range)
         {
 
@@ -151,7 +177,9 @@ namespace DWSIM.Automation
 
             return list;
         }
+#endif
 
+#if !HEADLESS
         private void SetCustomSpreadsheetFunctions()
         {
 
@@ -301,13 +329,21 @@ namespace DWSIM.Automation
                     return "INVALID ARGS";
             };
         }
+#else
+        private void SetCustomSpreadsheetFunctions()
+        {
+            // Headless mode: spreadsheet custom functions not available (ReoGrid requires WinForms)
+        }
+#endif
 
         public void Init()
         {
 
             Initialize();
 
+#if !HEADLESS
             Spreadsheet = unvell.ReoGrid.ReoGridControl.CreateMemoryWorkbook();
+#endif
 
             SetCustomSpreadsheetFunctions();
 

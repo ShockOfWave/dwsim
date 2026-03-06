@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class EditingForm_HeatExchanger_SHProperties
     Inherits System.Windows.Forms.Form
 
@@ -413,7 +413,9 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         resources.ApplyResources(Me.PictureBox2, "PictureBox2")
         Me.PictureBox2.BackColor = System.Drawing.Color.White
         Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        #If Not HEADLESS Then
         Me.PictureBox2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.Straight_tube_heat_exchanger_1_pass
+        #End If
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.TabStop = False
         '
@@ -422,7 +424,9 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.BackColor = System.Drawing.Color.White
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        #If Not HEADLESS Then
         Me.PictureBox1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.Straight_tube_heat_exchanger_2_pass
+        #End If
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '

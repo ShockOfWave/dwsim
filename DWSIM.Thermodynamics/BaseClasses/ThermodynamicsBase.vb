@@ -209,7 +209,7 @@ Namespace BaseClasses
                 Dim props As PropertyInfo() = Me.GetType.GetProperties()
                 For Each fi As PropertyInfo In props
                     If TypeOf Me.GetType.GetProperty(fi.Name).GetValue(Me, Nothing) Is Double Then
-                        .Add(New XElement(fi.Name, Double.Parse(Me.GetType.GetProperty(fi.Name).GetValue(Me, Nothing)).ToString(ci)))
+                        .Add(New XElement(fi.Name, Convert.ToDouble(Me.GetType.GetProperty(fi.Name).GetValue(Me, Nothing)).ToString(ci)))
                     Else
                         .Add(New XElement(fi.Name, Me.GetType.GetProperty(fi.Name).GetValue(Me, Nothing).ToString()))
                     End If

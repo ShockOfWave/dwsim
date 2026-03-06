@@ -1,4 +1,4 @@
-﻿'    Stream Classes
+'    Stream Classes
 '    Copyright 2008-2011 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -41,7 +41,9 @@ Namespace Streams
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_EnergyStream
+#End If
 
         Private WithEvents m_work As CapeOpen.RealParameter
         Private WithEvents m_tLow As CapeOpen.RealParameter
@@ -288,6 +290,7 @@ Namespace Streams
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of EnergyStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -308,7 +311,12 @@ Namespace Streams
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -316,9 +324,15 @@ Namespace Streams
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.energy_stream
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -335,6 +349,7 @@ Namespace Streams
             Return ResMan.GetLocalString("ESTR_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -343,6 +358,10 @@ Namespace Streams
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

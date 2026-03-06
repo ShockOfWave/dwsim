@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_CompressorExpander_Curves
     Inherits System.Windows.Forms.Form
 
@@ -44,27 +44,35 @@ Partial Class EditingForm_CompressorExpander_Curves
         'ToolStripButton1
         '
         resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
+        #If Not HEADLESS Then
         Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        #End If
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
+        #If Not HEADLESS Then
         Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
+        #End If
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'tsbExport
         '
         resources.ApplyResources(Me.tsbExport, "tsbExport")
         Me.tsbExport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        #If Not HEADLESS Then
         Me.tsbExport.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_up
+        #End If
         Me.tsbExport.Name = "tsbExport"
         '
         'tsbImport
         '
         resources.ApplyResources(Me.tsbImport, "tsbImport")
         Me.tsbImport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        #If Not HEADLESS Then
         Me.tsbImport.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_down
+        #End If
         Me.tsbImport.Name = "tsbImport"
         '
         'TabControl1

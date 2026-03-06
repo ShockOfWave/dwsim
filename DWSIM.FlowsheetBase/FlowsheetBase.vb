@@ -1,4 +1,4 @@
-﻿Imports System.Globalization
+Imports System.Globalization
 Imports System.Reflection
 Imports DWSIM.Interfaces
 Imports DWSIM.Drawing.SkiaSharp
@@ -18,7 +18,9 @@ Imports DWSIM.Thermodynamics.Streams
 Imports ICSharpCode.SharpZipLib.Zip
 Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+#If Not HEADLESS Then
 Imports Python.Runtime
+#End If
 Imports Microsoft.Scripting.Hosting
 Imports System.Text
 Imports DWSIM.SharedClasses.Flowsheet
@@ -1051,7 +1053,9 @@ Imports DWSIM.ExtensionMethods
                 myObj.GraphicObject = myGobj
                 SimulationObjects.Add(myGobj.Name, myObj)
 
+                #If Not HEADLESS Then
                 GraphicObjectControlPanelModeEditors.SetInputDelegate(myGobj, myObj)
+                #End If
 
             Case ObjectType.Controller_PID
 
@@ -1067,7 +1071,9 @@ Imports DWSIM.ExtensionMethods
                 myObj.GraphicObject = myGobj
                 SimulationObjects.Add(myGobj.Name, myObj)
 
+                #If Not HEADLESS Then
                 GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
+                #End If
 
             Case ObjectType.Controller_Python
 
@@ -2434,9 +2440,13 @@ Imports DWSIM.ExtensionMethods
                             End If
                         End If
                     ElseIf TypeOf obj Is Input Then
+                        #If Not HEADLESS Then
                         GraphicObjectControlPanelModeEditors.SetInputDelegate(gobj, obj)
+                        #End If
                     ElseIf TypeOf obj Is PIDController Then
+                        #If Not HEADLESS Then
                         GraphicObjectControlPanelModeEditors.SetPIDDelegate(gobj, obj)
+                        #End If
                     End If
                 End If
                 objlist.Add(obj)
@@ -3291,7 +3301,9 @@ Imports DWSIM.ExtensionMethods
                 If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
                     RunScript_IronPython(scr.ScriptText)
                 Else
+                    #If Not HEADLESS Then
                     RunScript_PythonNET(scr.ScriptText)
+                    #End If
                 End If
             End If
         Next
@@ -3740,7 +3752,9 @@ Label_00CC:
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
             RunScript_IronPython(script.ScriptText)
         Else
+            #If Not HEADLESS Then
             RunScript_PythonNET(script.ScriptText)
+            #End If
         End If
     End Sub
 
@@ -3797,6 +3811,7 @@ Label_00CC:
 
     End Sub
 
+    #If Not HEADLESS Then
     Private Sub RunScript_PythonNET(scripttext As String)
 
         If GlobalSettings.Settings.RunningPlatform <> Settings.Platform.Windows Then
@@ -3899,6 +3914,7 @@ Label_00CC:
         End If
 
     End Sub
+    #End If
 
     Private Class FlowsheetLogTextStream
 
@@ -3930,6 +3946,7 @@ Label_00CC:
     End Function
 
     Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
+        #If Not HEADLESS Then
 
         Dim olist As List(Of String) = objects
 
@@ -3943,6 +3960,9 @@ Label_00CC:
 
         Return olist
 
+        #Else
+            Return objects
+        #End If
     End Function
 
     Public Function GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
@@ -4699,9 +4719,13 @@ Label_00CC:
                                     End If
                                 End If
                             ElseIf TypeOf obj Is Input Then
+                                #If Not HEADLESS Then
                                 GraphicObjectControlPanelModeEditors.SetInputDelegate(obj.GraphicObject, obj)
+                                #End If
                             ElseIf TypeOf obj Is PIDController Then
+                                #If Not HEADLESS Then
                                 GraphicObjectControlPanelModeEditors.SetPIDDelegate(obj.GraphicObject, obj)
+                                #End If
                             End If
                         Next
 
@@ -5055,9 +5079,13 @@ Label_00CC:
                                         End If
                                     End If
                                 ElseIf TypeOf obj Is Input Then
+                                    #If Not HEADLESS Then
                                     GraphicObjectControlPanelModeEditors.SetInputDelegate(gobj, obj)
+                                    #End If
                                 ElseIf TypeOf obj Is PIDController Then
+                                    #If Not HEADLESS Then
                                     GraphicObjectControlPanelModeEditors.SetPIDDelegate(gobj, obj)
+                                    #End If
                                 End If
                             End If
                             objlist.Add(obj)

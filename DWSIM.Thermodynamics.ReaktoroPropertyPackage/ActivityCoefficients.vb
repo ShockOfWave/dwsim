@@ -40,7 +40,9 @@ Public Class ActivityCoefficients
             End If
         Next
 
+        #If Not HEADLESS Then
         Settings.InitializePythonEnvironment()
+        #End If
 
         Dim speciesPhases As New Dictionary(Of String, String)
         Dim speciesAmounts As New Dictionary(Of String, Double)

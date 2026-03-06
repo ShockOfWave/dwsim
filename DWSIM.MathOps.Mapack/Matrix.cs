@@ -530,6 +530,12 @@ namespace Mapack
         }
 
         /// <summary>Matrix-scalar multiplication.</summary>
+        /// <summary>Instance matrix-scalar multiplication.</summary>
+        public Matrix Multiply(double right)
+        {
+            return Multiply(this, right);
+        }
+
         public static Matrix Multiply(Matrix left, double right)
         {
             if (left == null)

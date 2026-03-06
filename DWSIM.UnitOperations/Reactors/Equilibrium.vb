@@ -1,4 +1,4 @@
-﻿'    Equilibrium Reactor Calculation Routines 
+'    Equilibrium Reactor Calculation Routines 
 '    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -41,7 +41,9 @@ Namespace Reactors
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
 
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorConvEqGibbs
+#End If
 
         Dim tmpx As Double(), tmpdx As Double()
 
@@ -604,6 +606,7 @@ Namespace Reactors
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayDynamicsEditForm()
 
             If fd Is Nothing Then
@@ -629,7 +632,12 @@ Namespace Reactors
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayDynamicsEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
 
             Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
@@ -656,6 +664,7 @@ Namespace Reactors
             table.Controls.Add(New Panel())
 
         End Sub
+        #End If
 
         Public Overrides Sub CreateDynamicProperties()
 
@@ -3560,6 +3569,7 @@ Namespace Reactors
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -3579,7 +3589,12 @@ Namespace Reactors
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -3587,9 +3602,15 @@ Namespace Reactors
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.reactor_equilibrium
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -3606,6 +3627,7 @@ Namespace Reactors
             Return ResMan.GetLocalString("EQUIL_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -3614,6 +3636,10 @@ Namespace Reactors
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

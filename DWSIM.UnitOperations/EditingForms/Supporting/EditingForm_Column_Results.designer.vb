@@ -628,35 +628,45 @@ Partial Class EditingForm_Column_Results
         '
         resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.TSB_Print.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.printer
+        #End If
         Me.TSB_Print.Name = "TSB_Print"
         '
         'TSB_PrinterSetup
         '
         resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.TSB_PrinterSetup.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.printer_add
+        #End If
         Me.TSB_PrinterSetup.Name = "TSB_PrinterSetup"
         '
         'TSB_PageSetup
         '
         resources.ApplyResources(Me.TSB_PageSetup, "TSB_PageSetup")
         Me.TSB_PageSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.TSB_PageSetup.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.page_white_gear
+        #End If
         Me.TSB_PageSetup.Name = "TSB_PageSetup"
         '
         'TSB_Preview
         '
         resources.ApplyResources(Me.TSB_Preview, "TSB_Preview")
         Me.TSB_Preview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.TSB_Preview.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.page_white_magnify
+        #End If
         Me.TSB_Preview.Name = "TSB_Preview"
         '
         'TSB_Copy
         '
         resources.ApplyResources(Me.TSB_Copy, "TSB_Copy")
         Me.TSB_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.TSB_Copy.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        #End If
         Me.TSB_Copy.Name = "TSB_Copy"
         '
         'PrintDialog1

@@ -44,6 +44,7 @@ Namespace PropertyPackages
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If GlobalSettings.Settings.CAPEOPENMode Then
@@ -54,12 +55,15 @@ Namespace PropertyPackages
             End If
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfigLIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
 
         End Function
+        #End If
 
 #Region "    DWSIM Functions"
 

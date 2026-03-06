@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_Pump_Curves
     Inherits System.Windows.Forms.Form
 
@@ -617,13 +617,17 @@ Partial Class EditingForm_Pump_Curves
         '
         'tsbImport
         '
+        #If Not HEADLESS Then
         Me.tsbImport.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_down
+        #End If
         resources.ApplyResources(Me.tsbImport, "tsbImport")
         Me.tsbImport.Name = "tsbImport"
         '
         'tsbExport
         '
+        #If Not HEADLESS Then
         Me.tsbExport.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_up
+        #End If
         resources.ApplyResources(Me.tsbExport, "tsbExport")
         Me.tsbExport.Name = "tsbExport"
         '

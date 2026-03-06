@@ -84,7 +84,9 @@ Namespace UnitOperations
         Dim BeV, BSGV, BSLV As Double
         Public AV, DV As Double
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Vessel
+#End If
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public MixedStream As MaterialStream
 
@@ -167,11 +169,14 @@ Namespace UnitOperations
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayDynamicsEditForm()
 
             If fd Is Nothing Then
                 fd = New DynamicsPropertyEditor With {.SimObject = Me}
+#If Not HEADLESS Then
                 fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+#End If
                 fd.Tag = "ObjectEditor"
                 fd.UpdateCallBack = Sub(table)
                                         AddButtonsToDynEditor(table)
@@ -180,7 +185,9 @@ Namespace UnitOperations
             Else
                 If fd.IsDisposed Then
                     fd = New DynamicsPropertyEditor With {.SimObject = Me}
+#If Not HEADLESS Then
                     fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+#End If
                     fd.Tag = "ObjectEditor"
                     fd.UpdateCallBack = Sub(table)
                                             AddButtonsToDynEditor(table)
@@ -192,7 +199,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayDynamicsEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
 
             Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
@@ -219,6 +231,7 @@ Namespace UnitOperations
             table.Controls.Add(New Panel())
 
         End Sub
+        #End If
 
         Public Function CalculateVolume() As Double
 
@@ -1494,6 +1507,7 @@ Namespace UnitOperations
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -1513,7 +1527,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1521,9 +1540,15 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.separator
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -1540,6 +1565,7 @@ Namespace UnitOperations
             Return ResMan.GetLocalString("VESSEL_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1548,6 +1574,10 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

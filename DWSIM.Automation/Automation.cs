@@ -1,12 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DWSIM.Interfaces;
 using System.Runtime.InteropServices;
+#if !HEADLESS
 using DWSIM.UI.Desktop.Shared;
+#endif
 using System.Xml.Linq;
 using System.IO;
 using System.Reflection;
+#if !HEADLESS
 using DWSIM.SharedClassesCSharp.FilePicker.Windows;
+#endif
 using DWSIM.GlobalSettings;
 using System.Linq;
 using DWSIM.Interfaces.Enums;
@@ -38,6 +42,7 @@ namespace DWSIM.Automation
 
     }
 
+    #if !HEADLESS
     [Guid("37437090-e541-4f2c-9856-d1e27df32ecb"), ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
     public class Automation : AutomationInterface
@@ -128,7 +133,9 @@ namespace DWSIM.Automation
             return fm;
         }
     }
+    #endif
 
+    #if !HEADLESS
     [Guid("22694b87-1ba6-4341-81dd-8d33f48643d7"), ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
     public class Automation2 : AutomationInterface
@@ -238,6 +245,7 @@ namespace DWSIM.Automation
             throw new NotImplementedException();
         }
     }
+    #endif
 
     [Guid("62486815-2330-4CDE-8962-41F576B0C2B8"), ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]

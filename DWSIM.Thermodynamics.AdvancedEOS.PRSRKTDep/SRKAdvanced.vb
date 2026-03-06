@@ -1,4 +1,3 @@
-﻿Imports System.Windows.Forms
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Thermodynamics.PropertyPackages
@@ -34,6 +33,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If GlobalSettings.Settings.CAPEOPENMode Then
@@ -45,12 +45,15 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             End If
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfig() With {._form = Me.Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
 
         End Function
+        #End If
 
         Public Overrides Function RET_VKij() As Double(,)
 

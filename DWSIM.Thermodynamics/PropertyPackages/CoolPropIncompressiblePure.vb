@@ -89,17 +89,21 @@ Namespace PropertyPackages
             Next
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
             Dim f As New FormConfigCoolPropIncompFluid
             f.pp = Me
             f.ShowDialog()
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfigCoolPropIncompFluid() With {.pp = Me}
 
         End Function
+        #End If
 
         Public Overrides Function SaveData() As List(Of XElement)
             Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)

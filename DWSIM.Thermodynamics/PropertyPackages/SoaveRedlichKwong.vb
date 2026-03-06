@@ -80,6 +80,7 @@ Namespace PropertyPackages
             Return m_pr
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If GlobalSettings.Settings.CAPEOPENMode Then
@@ -91,6 +92,7 @@ Namespace PropertyPackages
             End If
 
         End Sub
+        #End If
 
         Public Overrides Sub ConfigParameters()
 

@@ -1,4 +1,4 @@
-﻿'    Pipe Calculation Routines 
+'    Pipe Calculation Routines 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -20,7 +20,9 @@
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe
 Imports DWSIM.Thermodynamics.BaseClasses
@@ -54,7 +56,9 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.PressureChangers
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Pipe
+#End If
 
         Public Enum Specmode
             Length = 0
@@ -220,6 +224,7 @@ Namespace UnitOperations
             End With
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayDynamicsEditForm()
 
             If fd Is Nothing Then
@@ -245,7 +250,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayDynamicsEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
 
             Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("Initialize from Steady-State solution"),
@@ -277,9 +287,13 @@ Namespace UnitOperations
                                 AccumulationStreams.Add(as1)
                             Next
                         Next
+#If Not HEADLESS Then
                         MessageBox.Show(String.Format("{0}: Dynamic state initialized successfully.", GraphicObject.Tag), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+#End If
                     Catch ex As Exception
+#If Not HEADLESS Then
                         MessageBox.Show(String.Format("{0}: Error intializing dynamic state: {1}.", GraphicObject.Tag, ex.Message), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+#End If
                     End Try
                 End Sub
 
@@ -295,6 +309,7 @@ Namespace UnitOperations
             table.Controls.Add(New Panel())
 
         End Sub
+        #End If
 
         Public Overrides Sub CreateDynamicProperties()
 
@@ -2940,6 +2955,7 @@ Namespace UnitOperations
             End If
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -2959,7 +2975,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -2967,9 +2988,15 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.pipe_segment
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -2986,6 +3013,7 @@ Namespace UnitOperations
             Return ResMan.GetLocalString("PIPE_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -2994,6 +3022,10 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

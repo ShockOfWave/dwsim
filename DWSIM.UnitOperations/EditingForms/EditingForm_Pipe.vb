@@ -1,4 +1,4 @@
-﻿Imports System.Windows.Forms
+Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
@@ -510,7 +510,9 @@ Public Class EditingForm_Pipe
         Dim form As New WeifenLuo.WinFormsUI.Docking.DockContent With {.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document,
             .Text = SimObject.GraphicObject.Tag + " - Results",
             .TabText = .Text,
+            #If Not HEADLESS Then
             .Icon = My.Resources.DWSIM_Icon_4}
+            #End If
 
         form.Controls.Add(heditor)
 
@@ -526,7 +528,9 @@ Public Class EditingForm_Pipe
         Dim form As New WeifenLuo.WinFormsUI.Docking.DockContent With {.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document,
             .Text = SimObject.GraphicObject.Tag + " - Results",
             .TabText = .Text,
+            #If Not HEADLESS Then
             .Icon = My.Resources.DWSIM_Icon_4}
+            #End If
 
         form.Controls.Add(heditor)
 

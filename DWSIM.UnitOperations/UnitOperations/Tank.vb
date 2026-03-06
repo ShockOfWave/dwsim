@@ -1,4 +1,4 @@
-﻿'    Tank Calculation Routines 
+'    Tank Calculation Routines 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -20,7 +20,9 @@
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
@@ -55,7 +57,9 @@ Namespace UnitOperations
 
         End Sub
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Tank
+#End If
 
         Protected m_dp As Nullable(Of Double)
         Protected m_DQ As Nullable(Of Double)
@@ -141,11 +145,14 @@ Namespace UnitOperations
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayDynamicsEditForm()
 
             If fd Is Nothing Then
                 fd = New DynamicsPropertyEditor With {.SimObject = Me}
+#If Not HEADLESS Then
                 fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+#End If
                 fd.Tag = "ObjectEditor"
                 fd.UpdateCallBack = Sub(table)
                                         AddButtonsToDynEditor(table)
@@ -154,7 +161,9 @@ Namespace UnitOperations
             Else
                 If fd.IsDisposed Then
                     fd = New DynamicsPropertyEditor With {.SimObject = Me}
+#If Not HEADLESS Then
                     fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+#End If
                     fd.Tag = "ObjectEditor"
                     fd.UpdateCallBack = Sub(table)
                                             AddButtonsToDynEditor(table)
@@ -166,7 +175,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayDynamicsEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
 
             Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
@@ -196,6 +210,7 @@ Namespace UnitOperations
             table.Controls.Add(New Panel())
 
         End Sub
+        #End If
 
         Private prevM, currentM As Double
 
@@ -482,6 +497,7 @@ Namespace UnitOperations
             End If
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -501,7 +517,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
             If f Is Nothing Then
                 f = New EditingForm_Tank With {.SimObject = Me}
@@ -519,7 +540,13 @@ Namespace UnitOperations
                 End If
             End If
         End Function
+        #Else
+            Public Overrides Function GetEditingForm() As Object
+                Return Nothing
+            End Function
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -527,9 +554,15 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.tank
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -546,6 +579,7 @@ Namespace UnitOperations
             Return ResMan.GetLocalString("TANK_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -554,6 +588,10 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

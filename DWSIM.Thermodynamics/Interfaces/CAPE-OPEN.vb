@@ -146,6 +146,7 @@ Public Class CAPEOPENManager
         Throw New CapeNoImplException("Edit() not implemented.")
     End Sub
 
+    #If Not HEADLESS Then
     Public Sub Initialize() Implements ICapeUtilities.Initialize
 
         If Not Settings.InitializedCOPPM Then
@@ -195,7 +196,12 @@ Public Class CAPEOPENManager
         End If
 
     End Sub
+    #Else
+        Public Sub Initialize() Implements ICapeUtilities.Initialize
+        End Sub
+    #End If
 
+    #If Not HEADLESS Then
     Private Sub UnhandledException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
 
         Try
@@ -214,7 +220,9 @@ Public Class CAPEOPENManager
         End If
 
     End Sub
+    #End If
 
+    #If Not HEADLESS Then
     Private Sub UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
 
         Try
@@ -233,6 +241,7 @@ Public Class CAPEOPENManager
         End If
 
     End Sub
+    #End If
 
     Public ReadOnly Property parameters() As Object Implements ICapeUtilities.parameters
         Get
@@ -342,6 +351,7 @@ Public Class CAPEOPENManager
 
 #End Region
 
+    #If Not HEADLESS Then
     <System.Runtime.InteropServices.ComRegisterFunction()> _
     Private Shared Sub RegisterFunction(ByVal t As Type)
 
@@ -365,7 +375,9 @@ Public Class CAPEOPENManager
         key.Close()
 
     End Sub
+    #End If
 
+    #If Not HEADLESS Then
     <System.Runtime.InteropServices.ComUnregisterFunction()> _
     Private Shared Sub UnregisterFunction(ByVal t As Type)
         Try
@@ -385,5 +397,6 @@ Public Class CAPEOPENManager
 
         End Try
     End Sub
+    #End If
 
 End Class

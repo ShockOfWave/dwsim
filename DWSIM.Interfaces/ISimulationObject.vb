@@ -277,7 +277,7 @@ Public Interface ISimulationObject
 
     Sub CheckDirtyStatus()
 
-    Function GetEditingForm() As System.Windows.Forms.Form
+    Function GetEditingForm() As Object
 
     Function GetPreferredGraphicObjectWidth() As Double
 

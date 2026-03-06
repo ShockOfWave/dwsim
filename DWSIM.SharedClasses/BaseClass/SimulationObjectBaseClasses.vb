@@ -74,7 +74,11 @@ Namespace UnitOperations
 
         <NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
 
+#If Not HEADLESS Then
         <NonSerialized()> <Xml.Serialization.XmlIgnore> Public ExtraPropertiesEditor As Form
+#Else
+        <NonSerialized()> <Xml.Serialization.XmlIgnore> Public ExtraPropertiesEditor As Object
+#End If
 
         Public Property OverrideCalculationRoutine As Boolean = False
 
@@ -530,6 +534,7 @@ Namespace UnitOperations
 
         End Sub
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
 
         Public Overridable Sub DisplayDynamicsEditForm() Implements ISimulationObject.DisplayDynamicsEditForm
@@ -572,16 +577,33 @@ Namespace UnitOperations
             End If
 
         End Sub
+#Else
+        Public Overridable Sub DisplayDynamicsEditForm() Implements ISimulationObject.DisplayDynamicsEditForm
+            ' Not available in headless mode
+        End Sub
+
+        Public Sub UpdateDynamicsEditForm() Implements ISimulationObject.UpdateDynamicsEditForm
+            ' Not available in headless mode
+        End Sub
+
+        Public Sub CloseDynamicsEditForm() Implements ISimulationObject.CloseDynamicsEditForm
+            ' Not available in headless mode
+        End Sub
+#End If
 
         Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
 
         Public MustOverride Sub UpdateEditForm() Implements ISimulationObject.UpdateEditForm
 
+#If Not HEADLESS Then
         Public Overridable Function GetEditingForm() As Form Implements ISimulationObject.GetEditingForm
-
             Return Nothing
-
         End Function
+#Else
+        Public Overridable Function GetEditingForm() As Object Implements ISimulationObject.GetEditingForm
+            Return Nothing
+        End Function
+#End If
 
 
         ''' <summary>
@@ -1281,7 +1303,9 @@ Namespace UnitOperations
                 st.AppendLine(l)
             Next
 
+#If Not HEADLESS Then
             Clipboard.SetText(st.ToString())
+#End If
 
             DT.Clear()
             DT.Dispose()
@@ -1321,6 +1345,7 @@ Namespace UnitOperations
 
         End Sub
 
+#If Not HEADLESS Then
         Public Sub DisplayExtraPropertiesEditForm() Implements ISimulationObject.DisplayExtraPropertiesEditForm
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
@@ -1348,7 +1373,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+#Else
+        Public Sub DisplayExtraPropertiesEditForm() Implements ISimulationObject.DisplayExtraPropertiesEditForm
+        End Sub
+#End If
 
+#If Not HEADLESS Then
         Public Sub UpdateExtraPropertiesEditForm() Implements ISimulationObject.UpdateExtraPropertiesEditForm
 
             If ExtraPropertiesEditor IsNot Nothing Then
@@ -1358,6 +1388,10 @@ Namespace UnitOperations
             End If
 
         End Sub
+#Else
+        Public Sub UpdateExtraPropertiesEditForm() Implements ISimulationObject.UpdateExtraPropertiesEditForm
+        End Sub
+#End If
 
         Public Function GetDebugWriter() As StringBuilder
 

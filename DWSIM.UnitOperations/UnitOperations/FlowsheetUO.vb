@@ -1,4 +1,4 @@
-﻿'    Flowsheet Unit Operation
+'    Flowsheet Unit Operation
 '    Copyright 2015 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -29,7 +29,9 @@ Imports DWSIM.SharedClasses.Flowsheet
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.SharedClasses.UnitOperations
 Imports DWSIM.Interfaces.Enums
@@ -75,7 +77,9 @@ Namespace UnitOperations
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.UserModels
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_FlowsheetUO
+#End If
 
         Public Property SimulationFile As String = ""
         <System.Xml.Serialization.XmlIgnore> Public Property Initialized As Boolean = False
@@ -170,7 +174,7 @@ Namespace UnitOperations
 
         Shared Function ExtractXML(ByVal zippath As String) As String
 
-            Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+            Dim pathtosave As String = System.IO.Path.GetTempPath() + Path.DirectorySeparatorChar
             Dim fullname As String = ""
 
             Using stream As ICSharpCode.SharpZipLib.Zip.ZipInputStream = New ICSharpCode.SharpZipLib.Zip.ZipInputStream(File.OpenRead(zippath))
@@ -426,7 +430,7 @@ Label_00CC:
                                 Dim propname = xel.Element("Name").Value
                                 Dim proptype = xel.Element("PropertyType").Value
                                 Dim assembly1 As Assembly = Nothing
-                                For Each assembly In My.Application.Info.LoadedAssemblies
+                                For Each assembly In AppDomain.CurrentDomain.GetAssemblies()
                                     If proptype.Contains(assembly.GetName().Name) Then
                                         assembly1 = assembly
                                         Exit For
@@ -763,9 +767,9 @@ Label_00CC:
                     xel = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo")
 
                     xel.RemoveAll()
-                    xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
-                    xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
-                    xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+                    xel.Add(New XElement("BuildVersion", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString))
+                    xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build).AddSeconds(System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision * 2)))
+                    xel.Add(New XElement("OSInfo", System.Runtime.InteropServices.RuntimeInformation.OSDescription & ", Version " & Environment.OSVersion.Version.ToString() & ", " & Environment.OSVersion.Platform.ToString() & " Platform"))
                     xel.Add(New XElement("SavedOn", Date.Now))
 
                     xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
@@ -1312,6 +1316,7 @@ Label_00CC:
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -1331,7 +1336,12 @@ Label_00CC:
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
             If f Is Nothing Then
                 f = New EditingForm_FlowsheetUO With {.SimObject = Me}
@@ -1349,7 +1359,13 @@ Label_00CC:
                 End If
             End If
         End Function
+        #Else
+            Public Overrides Function GetEditingForm() As Object
+                Return Nothing
+            End Function
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1357,9 +1373,15 @@ Label_00CC:
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.flowsheet_block
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -1376,6 +1398,7 @@ Label_00CC:
             Return ResMan.GetLocalString("FLOWS_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1384,6 +1407,10 @@ Label_00CC:
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

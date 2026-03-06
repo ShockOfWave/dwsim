@@ -1,4 +1,4 @@
-﻿'    Valve Calculation Routines 
+'    Valve Calculation Routines 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -21,7 +21,9 @@ Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums
 Imports DotNumerics.Optimization.TN
+#If Not HEADLESS Then
 Imports NetOffice.ExcelApi
+#End If
 
 Namespace UnitOperations
 
@@ -61,7 +63,9 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Valve
+#End If
 
         Protected m_dp As Double?
         Protected m_dt As Double?
@@ -1434,6 +1438,7 @@ Namespace UnitOperations
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -1453,7 +1458,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1461,9 +1471,15 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.valve
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -1480,6 +1496,7 @@ Namespace UnitOperations
             Return ResMan.GetLocalString("VALVE_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1488,6 +1505,10 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

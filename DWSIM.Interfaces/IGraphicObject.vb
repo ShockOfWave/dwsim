@@ -106,7 +106,7 @@ Public Interface IGraphicObject
 
     Function GetPointValue(type As PointValueType, Xref As Integer, Yref As Integer, args As List(Of Object)) As Double
 
-    Function GetIconAsBitmap() As System.Drawing.Bitmap
+    Function GetIconAsBitmap() As Object
 
     Function GetIconAsStream() As IO.MemoryStream
 

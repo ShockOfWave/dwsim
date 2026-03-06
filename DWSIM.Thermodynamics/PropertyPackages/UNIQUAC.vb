@@ -63,18 +63,22 @@ Namespace PropertyPackages
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             Dim f As New FormConfigUNIQUAC() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
             f.ShowDialog()
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfigUNIQUAC() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
 
         End Function
+        #End If
 
         Public Overrides Function GetModel() As Object
             Return m_uni
@@ -122,7 +126,9 @@ Namespace PropertyPackages
                 i2 = 0
                 For Each c2 In CurrentMaterialStream.Phases(0).Compounds.Values
                     If c.Name <> c2.Name AndAlso Vx(i1) * Vx(i2) > 0.0 Then
+                        #If Not HEADLESS Then
                         ipdata = ExcelAddIn.ExcelIntegrationNoAttr.GetInteractionParameterSet(Me, "UNIQUAC", c.Name, c2.Name)
+                        #End If
                         Dim i As Integer, sum As Double
                         sum = 0
                         For i = 2 To 8

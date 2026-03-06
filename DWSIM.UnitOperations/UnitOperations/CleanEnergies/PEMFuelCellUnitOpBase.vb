@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
 Imports DWSIM.Interfaces.Enums
@@ -70,7 +70,9 @@ Namespace UnitOperations
 
         Private Image As SKImage
 
+#If Not HEADLESS Then
         <Xml.Serialization.XmlIgnore> Public f As EditingForm_OPEMFC
+#End If
 
         Public Property OPEMPath As String = "main\python-3.9.4.amd64"
 
@@ -279,6 +281,7 @@ Namespace UnitOperations
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -298,7 +301,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
 
             If f IsNot Nothing Then
@@ -308,7 +316,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
 
             If f IsNot Nothing Then
@@ -319,6 +332,10 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Function ToList(pythonlist As Object) As List(Of Double)
 

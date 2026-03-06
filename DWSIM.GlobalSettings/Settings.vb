@@ -1,9 +1,13 @@
-﻿Imports Cudafy
+#If Not HEADLESS Then
+Imports Cudafy
+#End If
 Imports System.Threading
 Imports Nini.Config
 Imports System.IO
 Imports System.Runtime.InteropServices
+#If Not HEADLESS Then
 Imports Python.Runtime
+#End If
 
 Public Class Settings
 
@@ -203,6 +207,8 @@ Public Class Settings
 
     Public Shared AIAssistedConvergenceLevel As AIAssistedConvergenceMode = AIAssistedConvergenceMode.Disabled
 
+#If Not HEADLESS Then
+
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function
@@ -312,15 +318,18 @@ Public Class Settings
 
     End Sub
 
+
+#End If
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         Dim configfiledir = GetConfigFileDir()
 
         If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 
-        If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
+        If configfile = "" Then configfile = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(IO.Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "dwsim.ini"
 
-        If Not File.Exists(configfile) Then File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "default.ini", configfile)
+        If Not File.Exists(configfile) Then File.Copy(AppDomain.CurrentDomain.BaseDirectory.TrimEnd(IO.Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "default.ini", configfile)
 
         Dim doc As New Nini.Ini.IniDocument(configfile, Nini.Ini.IniFileType.WindowsStyle)
         Dim source As New IniConfigSource(doc)
@@ -373,10 +382,10 @@ Public Class Settings
     Shared Sub SaveExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then
-            configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
-            File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "default.ini", configfile, True)
+            configfile = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(IO.Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "dwsim.ini"
+            File.Copy(AppDomain.CurrentDomain.BaseDirectory.TrimEnd(IO.Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "default.ini", configfile, True)
         Else
-            File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "excelcompat.ini", configfile, True)
+            File.Copy(AppDomain.CurrentDomain.BaseDirectory.TrimEnd(IO.Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + "excelcompat.ini", configfile, True)
         End If
 
         Dim source As New IniConfigSource(configfile)

@@ -47,13 +47,13 @@ Public Interface IExtender
 
     ReadOnly Property ID As String
 
-    Sub SetMainWindow(mainwindow As System.Windows.Forms.Form)
+    Sub SetMainWindow(mainwindow As Object)
 
     Sub SetFlowsheet(form As IFlowsheet)
 
     ReadOnly Property DisplayText As String
 
-    ReadOnly Property DisplayImage As System.Drawing.Bitmap
+    ReadOnly Property DisplayImage As Object
 
     ReadOnly Property InsertAtPosition As Integer
 

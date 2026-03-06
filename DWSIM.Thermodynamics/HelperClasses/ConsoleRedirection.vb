@@ -1,9 +1,12 @@
 ﻿Imports System.Text
 Imports System.IO
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 
 Namespace ConsoleRedirection
 
+#If Not HEADLESS Then
     Public Class TextBoxStreamWriter
 
         Inherits TextWriter
@@ -39,6 +42,7 @@ Namespace ConsoleRedirection
         End Property
 
     End Class
+#End If
 
     Public Class InspectorItemStreamWriter
 

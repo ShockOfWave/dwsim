@@ -117,7 +117,9 @@ Imports DWSIM.GlobalSettings
             End If
         Next
 
+        #If Not HEADLESS Then
         Settings.InitializePythonEnvironment()
+        #End If
 
         Dim speciesPhases As New Dictionary(Of String, String)
         Dim speciesAmounts As New Dictionary(Of String, Double)
@@ -616,7 +618,9 @@ Imports DWSIM.GlobalSettings
 
         Dim ppath As String = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "reaktoro_python")
 
+        #If Not HEADLESS Then
         Settings.InitializePythonEnvironment(ppath)
+        #End If
 
         Dim speciesPhases As New Dictionary(Of String, String)
         Dim speciesAmounts As New Dictionary(Of String, Double)

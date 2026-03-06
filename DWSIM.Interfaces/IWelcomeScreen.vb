@@ -18,8 +18,8 @@
 
 Public Interface IWelcomeScreen
 
-    Function GetWelcomeScreen() As System.Windows.Forms.UserControl
+    Function GetWelcomeScreen() As Object
 
-    Sub SetMainForm(form As System.Windows.Forms.Form)
+    Sub SetMainForm(form As Object)
 
 End Interface

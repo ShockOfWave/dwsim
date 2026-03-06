@@ -1,7 +1,10 @@
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 
 Module Extensions
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()> _
     Public Sub UIThread(control As Control, code As Action)
         If control.InvokeRequired Then
@@ -50,6 +53,7 @@ Module Extensions
             Return Double.NaN
         End If
     End Function
+#End If
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToArrayString(vector As Double()) As String
@@ -148,6 +152,7 @@ Module Extensions
 
     End Function
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()> _
     Public Sub PasteData(dgv As DataGridView)
 
@@ -219,6 +224,7 @@ Module Extensions
         Return Nothing
 
     End Function
+#End If
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function IsValid(d As Double) As Boolean

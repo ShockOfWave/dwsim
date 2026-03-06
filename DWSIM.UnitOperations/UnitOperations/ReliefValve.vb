@@ -1,4 +1,4 @@
-﻿Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.UnitOperations.UnitOperations
 Imports DWSIM.UnitOperations.UnitOperations.Valve
@@ -126,7 +126,9 @@ Namespace UnitOperations
 #Region "Automatic Drawing Support"
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.Relief_Valve_48px
+            #End If
         End Function
 
         Private Image As SkiaSharp.SKImage
@@ -212,9 +214,11 @@ Namespace UnitOperations
                     'load the icon image on memory
                     If Image Is Nothing Then
 
+                        #If Not HEADLESS Then
                         Using bitmap = My.Resources.Relief_Valve_48px.ToSKBitmap()
                             Image = SkiaSharp.SKImage.FromBitmap(bitmap)
                         End Using
+                        #End If
 
                     End If
 
@@ -276,9 +280,12 @@ Namespace UnitOperations
 
 #Region "Classic UI and Cross-Platform UI Editor Support"
 
+        #If Not HEADLESS Then
         <Xml.Serialization.XmlIgnore> Public editwindow As EditingForm_ReliefValve
+        #End If
 
         'display the editor on the classic user interface
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If editwindow Is Nothing Then
@@ -296,8 +303,13 @@ Namespace UnitOperations
             FlowSheet.DisplayForm(editwindow)
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
         'this updates the editor window on classic ui
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
 
             If editwindow IsNot Nothing Then
@@ -317,20 +329,35 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         'this closes the editor on classic ui
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
 
             editwindow?.Close()
 
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         'returns the editing form
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return Nothing
 
         End Function
+        #Else
+            Public Overrides Function GetEditingForm() As Object
+                Return Nothing
+            End Function
+        #End If
 
         'this function display the properties on the cross-platform user interface
         Public Sub PopulateEditorPanel(container As Object) Implements Interfaces.IExternalUnitOperation.PopulateEditorPanel

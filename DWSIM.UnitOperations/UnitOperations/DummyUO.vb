@@ -1,4 +1,4 @@
-﻿'    ISO 5167 Orifice Plate Calculation Routines 
+'    ISO 5167 Orifice Plate Calculation Routines 
 '    Copyright 2010 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -68,7 +68,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.square_240px
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()

@@ -10,7 +10,9 @@ Public Class Calculator
     Public Shared _ResourceManager As System.Resources.ResourceManager
     Public Shared Culture As Globalization.CultureInfo
 
+    #If Not HEADLESS Then
     Public Shared ExcelLogForm As LogForm
+    #End If
 
     Shared Sub WriteToConsole(text As String, level As Integer)
         If level <= Settings.DebugLevel Then Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] " + text)

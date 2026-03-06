@@ -471,7 +471,7 @@ Public Class EditingForm_SpreadsheetUO
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         If TbFileName.Text <> "" Then
-            If My.Computer.FileSystem.FileExists(TbFileName.Text) Then
+            If System.IO.File.Exists(TbFileName.Text) Then
                 If Not Thermodynamics.Calculator.IsRunningOnMono Then
                     Process.Start(TbFileName.Text)
                 Else
@@ -505,11 +505,11 @@ Public Class EditingForm_SpreadsheetUO
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim s As String = OpenFileDialog1.FileName
             If IO.Path.GetExtension(s).ToLower = ".ods" Then
-                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.ods", s)
+                FileCopy(AppDomain.CurrentDomain.BaseDirectory & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.ods", s)
             ElseIf IO.Path.GetExtension(s).ToLower = ".xls" Then
-                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xls", s)
+                FileCopy(AppDomain.CurrentDomain.BaseDirectory & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xls", s)
             Else
-                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xlsx", s)
+                FileCopy(AppDomain.CurrentDomain.BaseDirectory & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xlsx", s)
             End If
             TbFileName.Text = s
             SimObject.ParamsLoaded = False

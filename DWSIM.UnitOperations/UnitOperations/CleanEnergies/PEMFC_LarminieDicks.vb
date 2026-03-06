@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports DWSIM.UnitOperations.UnitOperations
 Imports Python.Runtime
 
@@ -45,7 +45,9 @@ Namespace UnitOperations
 
         Public Overrides Function GetIconBitmap() As Object
 
+            #If Not HEADLESS Then
             Return My.Resources.fuel_cell
+            #End If
 
         End Function
 

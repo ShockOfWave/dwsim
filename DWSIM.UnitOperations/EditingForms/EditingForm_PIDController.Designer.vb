@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_PIDController
 
     'Form overrides dispose to clean up the component list.
@@ -288,7 +288,9 @@ Partial Class EditingForm_PIDController
         'chkActive
         '
         resources.ApplyResources(Me.chkActive, "chkActive")
+        #If Not HEADLESS Then
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        #End If
         Me.chkActive.Name = "chkActive"
         Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
@@ -358,7 +360,9 @@ Partial Class EditingForm_PIDController
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
+        #If Not HEADLESS Then
         Me.Button1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lightning
+        #End If
         Me.Button1.Name = "Button1"
         Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip1"))

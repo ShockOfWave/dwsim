@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports DWSIM.UnitOperations.UnitOperations
 Imports Python.Runtime
 Imports Eto.Forms
@@ -57,7 +57,9 @@ Namespace UnitOperations
 
         Public Overrides Function GetIconBitmap() As Object
 
+            #If Not HEADLESS Then
             Return My.Resources.fuel_cell
+            #End If
 
         End Function
 
@@ -85,7 +87,9 @@ Namespace UnitOperations
 
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
+                #If Not HEADLESS Then
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+                #End If
 
             End If
 

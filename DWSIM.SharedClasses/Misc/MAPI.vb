@@ -1,3 +1,4 @@
+#If Not HEADLESS Then
 ﻿Imports System.Runtime.InteropServices
 Imports System.IO
 
@@ -214,3 +215,4 @@ Namespace SendFileTo
         Public enTryID As IntPtr
     End Class
 End Namespace
+#End If

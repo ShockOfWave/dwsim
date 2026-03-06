@@ -184,6 +184,7 @@ Public Class FOSSEEFlowsheets
             Console.WriteLine("Error deleting " & fpath2 & ": " & ex.ToString)
         End Try
 
+#If Not HEADLESS Then
         If abstractfile <> "" Then
             Task.Factory.StartNew(Sub()
                                       Dim p = Process.Start(abstractfile)
@@ -198,6 +199,7 @@ Public Class FOSSEEFlowsheets
                                       End If
                                   End Sub)
         End If
+#End If
 
         Return xdoc
 

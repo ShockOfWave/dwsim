@@ -1,4 +1,4 @@
-﻿Imports DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports Ciloci.Flee
 Imports System.Math
 Imports System.Linq
@@ -36,7 +36,9 @@ Namespace Reactors
 
         Public Property UseEmbeddedImage As Boolean = False
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReaktoroGibbs
+#End If
 
         Public Property DatabaseName As String = "supcrt07.xml"
 
@@ -142,7 +144,9 @@ Namespace Reactors
 
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
+                #If Not HEADLESS Then
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+                #End If
 
             Else
 
@@ -375,6 +379,7 @@ Namespace Reactors
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -394,7 +399,12 @@ Namespace Reactors
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -402,7 +412,12 @@ Namespace Reactors
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -411,7 +426,12 @@ Namespace Reactors
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
             If f Is Nothing Then
                 f = New EditingForm_ReaktoroGibbs With {.SimObject = Me}
@@ -429,10 +449,17 @@ Namespace Reactors
                 End If
             End If
         End Function
+        #Else
+            Public Overrides Function GetEditingForm() As Object
+                Return Nothing
+            End Function
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
 
+            #If Not HEADLESS Then
             Return My.Resources.reactor_reaktoro
+            #End If
 
         End Function
 
@@ -463,7 +490,9 @@ Namespace Reactors
                 If Image Is Nothing Then
 
                     ImagePath = SharedClasses.Utility.GetTempFileName()
+                    #If Not HEADLESS Then
                     My.Resources.reactor_reaktoro.Save(ImagePath)
+                    #End If
 
                     Using streamBG = New FileStream(ImagePath, FileMode.Open)
                         Using bitmap = SKBitmap.Decode(streamBG)
@@ -615,7 +644,9 @@ Namespace Reactors
 
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
+                #If Not HEADLESS Then
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+                #End If
 
             End If
 

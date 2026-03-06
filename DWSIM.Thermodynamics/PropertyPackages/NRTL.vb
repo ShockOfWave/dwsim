@@ -65,6 +65,7 @@ Namespace PropertyPackages
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If GlobalSettings.Settings.CAPEOPENMode Then
@@ -76,12 +77,15 @@ Namespace PropertyPackages
             End If
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Function GetEditingForm() As Form
 
             Return New FormConfigNRTL() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
 
         End Function
+        #End If
 
         Public Overrides Function CheckMissingInteractionParameters(Vx As Double()) As Boolean
 
@@ -93,7 +97,9 @@ Namespace PropertyPackages
                 i2 = 0
                 For Each c2 In CurrentMaterialStream.Phases(0).Compounds.Values
                     If c.Name <> c2.Name AndAlso Vx(i1) * Vx(i2) > 0.0 Then
+                        #If Not HEADLESS Then
                         ipdata = ExcelAddIn.ExcelIntegrationNoAttr.GetInteractionParameterSet(Me, "NRTL", c.Name, c2.Name)
+                        #End If
                         Dim i As Integer, sum As Double
                         sum = 0
                         For i = 2 To 8

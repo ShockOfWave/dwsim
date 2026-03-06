@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class EditingForm_CustomUO_ScriptEditor
     Inherits SharedClasses.ObjectEditorForm
 
@@ -159,14 +159,18 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         'btnUndo
         '
         Me.btnUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.btnUndo.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.turn_left
+        #End If
         resources.ApplyResources(Me.btnUndo, "btnUndo")
         Me.btnUndo.Name = "btnUndo"
         '
         'btnRedo
         '
         Me.btnRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.btnRedo.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.turn_right
+        #End If
         resources.ApplyResources(Me.btnRedo, "btnRedo")
         Me.btnRedo.Name = "btnRedo"
         '
@@ -178,14 +182,18 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         'ToolStripButton2
         '
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        #End If
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'ToolStripButton3
         '
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
+        #End If
         resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
@@ -207,7 +215,9 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         'btnDebug
         '
         Me.btnDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.btnDebug.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.control_play
+        #End If
         resources.ApplyResources(Me.btnDebug, "btnDebug")
         Me.btnDebug.Name = "btnDebug"
         '
@@ -225,7 +235,9 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         'APIHelptsbutton
         '
         Me.APIHelptsbutton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.APIHelptsbutton.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.script_code
+        #End If
         resources.ApplyResources(Me.APIHelptsbutton, "APIHelptsbutton")
         Me.APIHelptsbutton.Name = "APIHelptsbutton"
         '

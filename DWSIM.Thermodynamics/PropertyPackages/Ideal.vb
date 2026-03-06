@@ -70,6 +70,7 @@ Namespace PropertyPackages
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditingForm()
 
             If GlobalSettings.Settings.CAPEOPENMode Then
@@ -81,6 +82,7 @@ Namespace PropertyPackages
             End If
 
         End Sub
+        #End If
 
 #Region "    DWSIM Functions"
 

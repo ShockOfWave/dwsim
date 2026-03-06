@@ -1,4 +1,3 @@
-﻿Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports System.IO
 

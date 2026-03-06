@@ -1,4 +1,4 @@
-﻿'    Excel/Spreadsheet Unit Calculation Routines 
+'    Excel/Spreadsheet Unit Calculation Routines 
 '    Copyright 2014 Gregor Reichert, 2015 Daniel Wagner
 '
 '    This file is part of DWSIM.
@@ -17,13 +17,17 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
+#If Not HEADLESS Then
 Imports Excel = NetOffice.ExcelApi
 Imports NetOffice.ExcelApi.Enums
+#End If
 Imports GS = GemBox.Spreadsheet
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Interfaces.Enums
 Imports System.IO
@@ -59,6 +63,7 @@ Namespace UnitOperations
             Return Process.GetProcessById(id)
         End Function
 
+        #If Not HEADLESS Then
         Private Sub TerminateExcelProcess(ByVal excelApp As Object)
             Try
                 Dim process = GetExcelProcess(excelApp)
@@ -68,10 +73,13 @@ Namespace UnitOperations
             Catch ex As System.Runtime.InteropServices.InvalidComObjectException
             End Try
         End Sub
+        #End If
 
 
 
+#If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SpreadsheetUO
+#End If
 
         Protected m_DQ As Nullable(Of Double)
         Protected m_FileName As String = ""
@@ -190,8 +198,11 @@ Namespace UnitOperations
 
             End If
 
+            #If Not HEADLESS Then
             If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
+            #End If
 
+            #If Not HEADLESS Then
             If Not Calculator.IsRunningOnMono And Not excelType Is Nothing Then
 
                 Dim excelProxy As Object = Activator.CreateInstance(excelType)
@@ -208,7 +219,7 @@ Namespace UnitOperations
                     Next
 
                     Dim mybook As Excel.Workbook
-                    Dim AppPath = Application.StartupPath
+                    Dim AppPath = AppDomain.CurrentDomain.BaseDirectory
 
                     Dim tmpfile As String = ""
 
@@ -468,6 +479,7 @@ Namespace UnitOperations
                 TerminateExcelProcess(excelProxy)
 
             Else
+            #End If
 
                 'use GemBox to read and write data
 
@@ -475,7 +487,7 @@ Namespace UnitOperations
 
                 Dim xcl As GS.ExcelFile = Nothing
 
-                Dim AppPath = Application.StartupPath
+                Dim AppPath = AppDomain.CurrentDomain.BaseDirectory
 
                 Dim tmpfile As String = ""
 
@@ -486,7 +498,7 @@ Namespace UnitOperations
                     xcl = GS.ExcelFile.Load(tmpfile)
                 Else
                     'Load Excel definition file
-                    If My.Computer.FileSystem.FileExists(Filename) Then
+                    If System.IO.File.Exists(Filename) Then
                         xcl = GS.ExcelFile.Load(Filename)
                     Else
                         Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
@@ -499,7 +511,9 @@ Namespace UnitOperations
 
                 If Not Me.GraphicObject.InputConnectors(4).IsAttached Then 'Check if Energy stream existing
                     Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow1"))
+            #If Not HEADLESS Then
                 End If
+            #End If
 
                 'check if at least one input and output connection is available
                 For k = 0 To 3
@@ -596,7 +610,9 @@ Namespace UnitOperations
                             .StartInfo.Arguments = Filename
                             .StartInfo.UseShellExecute = False
                             .Start()
+#If Not HEADLESS Then
                             MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
+#End If
                         End With
                     Else 'macOS
                         Dim p As New Process()
@@ -605,12 +621,16 @@ Namespace UnitOperations
                             .StartInfo.Arguments = Filename
                             .StartInfo.UseShellExecute = False
                             .Start()
+#If Not HEADLESS Then
                             MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
+#End If
                         End With
                     End If
                 Else
                     Process.Start(Filename)
+#If Not HEADLESS Then
                     MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
+#End If
                 End If
 
                 If FileIsEmbedded Then
@@ -781,8 +801,11 @@ Namespace UnitOperations
 
                 Dim excelType As Type = Nothing
 
+                #If Not HEADLESS Then
                 If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
+                #End If
 
+                #If Not HEADLESS Then
                 If Not Calculator.IsRunningOnMono And Not excelType Is Nothing Then
 
                     Dim excelProxy As Object = Activator.CreateInstance(excelType)
@@ -797,7 +820,7 @@ Namespace UnitOperations
                         Next
 
                         Dim mybook As Excel.Workbook
-                        Dim AppPath = Application.StartupPath
+                        Dim AppPath = AppDomain.CurrentDomain.BaseDirectory
                         Dim ParName As String
                         Dim i As Integer
 
@@ -884,6 +907,7 @@ Namespace UnitOperations
                     TerminateExcelProcess(excelProxy)
 
                 Else
+                #End If
 
                     'use GemBox to read and write data
 
@@ -891,7 +915,7 @@ Namespace UnitOperations
 
                     Dim xcl As GS.ExcelFile = Nothing
 
-                    Dim AppPath = Application.StartupPath
+                    Dim AppPath = AppDomain.CurrentDomain.BaseDirectory
                     Dim ParName As String
                     Dim i As Integer
 
@@ -953,7 +977,9 @@ Namespace UnitOperations
                         End Try
                     End If
 
+                #If Not HEADLESS Then
                 End If
+                #End If
 
             End If
 
@@ -1072,6 +1098,7 @@ Namespace UnitOperations
             End If
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -1091,7 +1118,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1099,9 +1131,15 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.table
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -1118,6 +1156,7 @@ Namespace UnitOperations
             Return ResMan.GetLocalString("EXLUO_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1126,6 +1165,10 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

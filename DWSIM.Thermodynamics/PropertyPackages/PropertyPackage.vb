@@ -11907,10 +11907,15 @@ Final3:
         ''' The PMC displays its user interface and allows the Flowsheet User to interact with it. If no user interface is
         ''' available it returns an error.</summary>
         ''' <remarks></remarks>
+        #If Not HEADLESS Then
         Public Overridable Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
             Dim cf As New FormConfigCAPEOPENPPackage With {._pp = Me}
             cf.ShowDialog()
         End Sub
+        #Else
+            Public Overridable Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
+            End Sub
+        #End If
 
         ''' <summary>
         ''' Initially, this method was only present in the ICapeUnit interface. Since ICapeUtilities.Initialize is now
@@ -13431,12 +13436,19 @@ Final3:
 
         End Sub
 
+        #If Not HEADLESS Then
         Public Overridable Function GetEditingForm() As System.Windows.Forms.Form
 
             Return New FormConfigPropertyPackage() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
 
         End Function
+        #Else
+            Public Overridable Function GetEditingForm() As Object
+                Return Nothing
+            End Function
+        #End If
 
+        #If Not HEADLESS Then
         Public Sub DisplayFlashConfigForm()
             Dim fset As New FlashAlgorithmConfig
             fset.Settings = FlashSettings
@@ -13447,7 +13459,9 @@ Final3:
                 fset.Show()
             End If
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overridable Sub DisplayGroupedEditingForm() Implements IPropertyPackage.DisplayGroupedEditingForm
 
             If TypeOf Me Is CAPEOPENPropertyPackage Then
@@ -13499,8 +13513,13 @@ Final3:
             End If
 
         End Sub
+        #Else
+            Public Overridable Sub DisplayGroupedEditingForm() Implements IPropertyPackage.DisplayGroupedEditingForm
+            End Sub
+        #End If
 
 
+        #If Not HEADLESS Then
         Public Function DisplayAdvancedEditingForm() As Object Implements IPropertyPackage.DisplayAdvancedEditingForm
 
             Dim form = GetAdvancedEditingForm()
@@ -13522,7 +13541,13 @@ Final3:
             End If
 
         End Function
+        #Else
+            Public Function DisplayAdvancedEditingForm() As Object Implements IPropertyPackage.DisplayAdvancedEditingForm
+                Return Nothing
+            End Function
+        #End If
 
+        #If Not HEADLESS Then
         Public Function GetAdvancedEditingForm() As Eto.Forms.Form
 
             Dim containers = GetAdvancedEditingContainers()
@@ -13541,7 +13566,9 @@ Final3:
 
 
         End Function
+        #End If
 
+        #If Not HEADLESS Then
         Public Function GetAdvancedEditingContainers() As Eto.Forms.DynamicLayout()
 
             Dim sf = GlobalSettings.Settings.DpiScale
@@ -13632,12 +13659,15 @@ Final3:
             Return New Eto.Forms.DynamicLayout() {container1, container2}
 
         End Function
+        #End If
 
+        #If Not HEADLESS Then
         Public Overridable Function GetDisplayIcon() As Drawing.Bitmap
 
             Return My.Resources.DWSIM_ico_64
 
         End Function
+        #End If
 
         <JsonIgnore> <XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
             Get

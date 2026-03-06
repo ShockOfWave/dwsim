@@ -1166,9 +1166,9 @@ Public Class GraphicsSurface
                 SelectRectangle = False
 #Else
             If MultiSelectMode Then
-                SelectRectangle = Not My.Computer.Keyboard.ShiftKeyDown
+                SelectRectangle = Not False
             Else
-                SelectRectangle = My.Computer.Keyboard.ShiftKeyDown
+                SelectRectangle = False
             End If
 #End If
 
@@ -1194,7 +1194,7 @@ Public Class GraphicsSurface
                         End If
                         justselected = False
 #Else
-                    If My.Computer.Keyboard.CtrlKeyDown And MultiSelectMode Then
+                    If False And MultiSelectMode Then
                         If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
                             Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
                         Else

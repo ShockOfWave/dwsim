@@ -1,4 +1,6 @@
-﻿Imports System.Windows.Forms
+#If Not HEADLESS Then
+Imports System.Windows.Forms
+#End If
 Imports System.Globalization
 Imports DWSIM.Interfaces.Enums
 Imports System.Linq
@@ -244,6 +246,7 @@ Public Module General
 
     End Function
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Sub ValidateCellForDouble(dgv As DataGridView, e As DataGridViewCellValidatingEventArgs)
 
@@ -261,6 +264,7 @@ Public Module General
         End If
 
     End Sub
+#End If
 
     <System.Runtime.CompilerServices.Extension()>
     Public Function IsValidDouble(obj As Object) As Boolean
@@ -319,7 +323,7 @@ Public Module General
 
                 For Each obj As Object In sourcearray
                     If TypeOf obj Is Double Then
-                        sb += Double.Parse(obj).ToString(ci) + ","
+                        sb += Convert.ToDouble(obj).ToString(ci) + ","
                     Else
                         sb += obj.ToString + ","
                     End If
@@ -391,6 +395,7 @@ Public Module General
 
     End Function
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Sub UIThread(control As Control, code As Action)
         If control.InvokeRequired Then
@@ -399,7 +404,9 @@ Public Module General
             code.Invoke()
         End If
     End Sub
+#End If
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Sub UIThreadInvoke(control As Control, code As Action)
         If control.InvokeRequired Then
@@ -408,12 +415,14 @@ Public Module General
             code.Invoke()
         End If
     End Sub
+#End If
 
     '<System.Runtime.CompilerServices.Extension()> _
     'Public Function ToDTPoint(pt As System.Drawing.Point) As DrawingTools.Point
     '    Return New DrawingTools.Point(pt.X, pt.Y)
     'End Function
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Function GetUnits(control As System.Windows.Forms.GridItem) As String
         If control.Value.ToString().Split(" ").Length > 1 Then
@@ -422,7 +431,9 @@ Public Module General
             Return ""
         End If
     End Function
+#End If
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Function GetValue(control As System.Windows.Forms.GridItem) As Double
         Dim istring As Object
@@ -444,7 +455,9 @@ Public Module General
             Return Double.NaN
         End If
     End Function
+#End If
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Function DropDownWidth(control As ListView) As Integer
         Dim maxWidth As Integer = 0, temp As Integer = 0
@@ -456,7 +469,9 @@ Public Module General
         Next
         Return maxWidth
     End Function
+#End If
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Function DropDownHeight(control As ListView) As Integer
         Dim Height As Integer = 0, temp As Integer = 0
@@ -466,6 +481,7 @@ Public Module General
         Next
         Return Height
     End Function
+#End If
 
     <System.Runtime.CompilerServices.Extension()>
     Public Function ToArrayString(vector As Double()) As String
@@ -582,8 +598,8 @@ Public Module General
     <System.Runtime.CompilerServices.Extension()>
     Public Function ToDoubleWithSeparator(s As String, sep As String) As Double
         Dim nstring As String = s.Replace(sep, ".")
-        If Double.TryParse(nstring, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, New Double) Then
-            Return Double.Parse(nstring, NumberStyles.Any - NumberStyles.AllowThousands, Globalization.CultureInfo.InvariantCulture)
+        If Double.TryParse(nstring, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, 0.0#) Then
+            Return Double.Parse(nstring, NumberStyles.Any And Not NumberStyles.AllowThousands, Globalization.CultureInfo.InvariantCulture)
         Else
             Return 0.0#
         End If
@@ -594,7 +610,7 @@ Public Module General
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
-        Return Double.Parse(s.Replace(",", "."), NumberStyles.Any - NumberStyles.AllowThousands, ci)
+        Return Double.Parse(s.Replace(",", "."), NumberStyles.Any And Not NumberStyles.AllowThousands, ci)
 
     End Function
 
@@ -603,7 +619,7 @@ Public Module General
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
-        Return Single.Parse(s.Replace(",", "."), NumberStyles.Any - NumberStyles.AllowThousands, ci)
+        Return Single.Parse(s.Replace(",", "."), NumberStyles.Any And Not NumberStyles.AllowThousands, ci)
 
     End Function
 
@@ -612,8 +628,8 @@ Public Module General
 
         Dim ci As CultureInfo = CultureInfo.CurrentCulture
 
-        If Double.TryParse(s, NumberStyles.Any - NumberStyles.AllowThousands, ci, New Double) Then
-            Return Double.Parse(s, NumberStyles.Any - NumberStyles.AllowThousands, ci)
+        If Double.TryParse(s, NumberStyles.Any And Not NumberStyles.AllowThousands, ci, 0.0#) Then
+            Return Double.Parse(s, NumberStyles.Any And Not NumberStyles.AllowThousands, ci)
         Else
             Return 0.0
         End If
@@ -723,6 +739,7 @@ Public Module General
 
     End Function
 
+#If Not HEADLESS Then
     <System.Runtime.CompilerServices.Extension()>
     Public Sub PasteData(dgv As DataGridView, Optional ByVal addnewline As Boolean = True)
 
@@ -800,6 +817,7 @@ Public Module General
         Return Nothing
 
     End Function
+#End If
 
     <System.Runtime.CompilerServices.Extension()>
     Public Function IsValid(d As Double) As Boolean

@@ -40,10 +40,18 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
+#If Not HEADLESS Then
+        #If Not HEADLESS Then
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CAPEOPENUO
+        #End If
+#End If
 
         <System.NonSerialized()> Private _couo As Object
+        #If Not HEADLESS Then
+        #If Not HEADLESS Then
         <System.NonSerialized()> Private _form As Form_CapeOpenSelector
+        #End If
+        #End If
 
         Private m_reactionSetID As String = "DefaultSet"
         Private m_reactionSetName As String = ""
@@ -105,6 +113,7 @@ Namespace UnitOperations
             Me.ComponentName = name
             Me.ComponentDescription = description
 
+            #If Not HEADLESS Then
             If GlobalSettings.Settings.RunningPlatform() = Settings.Platform.Windows Then
 
                 If Not chemsep Then
@@ -126,7 +135,9 @@ Namespace UnitOperations
                     frmwait.Show()
 
                     Task.Factory.StartNew(Sub()
+                                              #If Not HEADLESS Then
                                               Dim colist = Form_CapeOpenSelector.SearchCOUOS(True)
+                                              #End If
                                               Dim cs = colist.Where(Function(x) x.Name.ToLower.Contains("chemsep")).SingleOrDefault
                                               If Not cs Is Nothing Then
                                                   _seluo = cs
@@ -146,6 +157,7 @@ Namespace UnitOperations
                 FlowSheet.ShowMessage("CAPE-OPEN Unit Operations are not supported on macOS and Linux. They will run in read-only bypass mode on these systems.", IFlowsheet.MessageType.Warning)
 
             End If
+            #End If
 
         End Sub
 
@@ -191,7 +203,9 @@ Namespace UnitOperations
                     Try
                         If _couo Is Nothing Then _couo = Activator.CreateInstance(t)
                     Catch ex As Exception
+#If Not HEADLESS Then
                         MessageBox.Show("Error creating CAPE-OPEN Unit Operation instance." & vbCrLf & ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+#End If
                     End Try
                 End If
 
@@ -214,7 +228,9 @@ Namespace UnitOperations
                         _restorefromcollections = False
                     Catch ex As Exception
                         'couldn't restore data from IStream. Will restore using port and parameter collections instead.
+#If Not HEADLESS Then
                         MessageBox.Show(Me.GraphicObject.Tag + ": Error restoring persisted data from CAPE-OPEN Object - " + ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+#End If
                         _restorefromcollections = True
                     End Try
                 Else
@@ -226,8 +242,12 @@ Namespace UnitOperations
                             _restorefromcollections = False
                         Catch ex As Exception
                             Dim ecu As CapeOpen.ECapeUser = _couo
+#If Not HEADLESS Then
                             MessageBox.Show(Me.ComponentName + ": error loading CAPE-OPEN Unit Operation - " + ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+#End If
+#If Not HEADLESS Then
                             MessageBox.Show(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description)
+#End If
                             _restorefromcollections = True
                         End Try
                     End If
@@ -298,9 +318,12 @@ Namespace UnitOperations
         End Sub
 
 
+        #If Not HEADLESS Then
         Sub ShowForm()
 
+            #If Not HEADLESS Then
             _form = New Form_CapeOpenSelector
+            #End If
             _form.ShowDialog(Me.FlowSheet)
             Me._seluo = _form._seluo
             If _seluo.Name.ToLower.Contains("chemsep") Then
@@ -310,6 +333,7 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #End If
 
         Overloads Sub InitNew()
 
@@ -1247,6 +1271,7 @@ Namespace UnitOperations
 
 #End Region
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -1266,7 +1291,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1274,9 +1304,15 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function GetIconBitmap() As Object
+            #If Not HEADLESS Then
             Return My.Resources.uo_co_32
+            #End If
         End Function
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
@@ -1293,6 +1329,7 @@ Namespace UnitOperations
             Return ResMan.GetLocalString("COUO_Name")
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
@@ -1301,6 +1338,10 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get

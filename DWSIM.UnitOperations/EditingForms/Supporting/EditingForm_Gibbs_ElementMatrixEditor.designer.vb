@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_Gibbs_ElementMatrixEditor
     Inherits System.Windows.Forms.UserControl
 
@@ -58,25 +58,33 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         'ToolStripButton1
         '
         resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
+        #If Not HEADLESS Then
         Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        #End If
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
+        #If Not HEADLESS Then
         Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
+        #End If
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'ToolStripButton3
         '
         resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
+        #If Not HEADLESS Then
         Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disk
+        #End If
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
         resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
+        #If Not HEADLESS Then
         Me.ToolStripButton4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        #End If
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'EditingForm_Gibbs_ElementMatrixEditor

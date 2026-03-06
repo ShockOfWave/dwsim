@@ -1,4 +1,4 @@
-﻿'    CAPE-OPEN Unit Operation Base Class
+'    CAPE-OPEN Unit Operation Base Class
 '    Copyright 2016 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -20,7 +20,9 @@ Imports System.Runtime.InteropServices
 Imports CapeOpen
 Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Thermodynamics
+#If Not HEADLESS Then
 Imports System.Windows.Forms
+#End If
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO
 
@@ -41,6 +43,7 @@ Namespace UnitOperations.CAPEOPENWrappers
         End Property
 
         Public Overridable Shadows Sub Initialize() Implements ICapeUtilities.Initialize
+            #If Not HEADLESS Then
 
             My.Application.ChangeUICulture("en")
 
@@ -54,6 +57,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
             End Try
 
+            #End If
         End Sub
 
         Public Overridable Shadows Sub Terminate() Implements ICapeUtilities.Terminate
@@ -78,6 +82,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
 #Region "   Error Handling"
 
+        #If Not HEADLESS Then
         Private Sub UnhandledException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
 
             Try
@@ -89,7 +94,9 @@ Namespace UnitOperations.CAPEOPENWrappers
             End Try
 
         End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Private Sub UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
 
             Try
@@ -101,6 +108,7 @@ Namespace UnitOperations.CAPEOPENWrappers
             End Try
 
         End Sub
+        #End If
 
 
 #End Region
@@ -175,7 +183,9 @@ Namespace UnitOperations.CAPEOPENWrappers
 
             Catch p_Ex As System.Exception
 
+#If Not HEADLESS Then
                 System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
+#End If
 
             End Try
 
@@ -221,7 +231,9 @@ Namespace UnitOperations.CAPEOPENWrappers
 
             Catch p_Ex As System.Exception
 
+#If Not HEADLESS Then
                 System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
+#End If
 
             End Try
 

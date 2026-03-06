@@ -1,4 +1,4 @@
-﻿#If DEBUG Then
+#If DEBUG Then
 
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
@@ -218,7 +218,9 @@ Partial Class EditingForm_ReliefValve
         'btnCreateAndConnectOutlet1
         '
         Me.btnCreateAndConnectOutlet1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        #If Not HEADLESS Then
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        #End If
         Me.btnCreateAndConnectOutlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(323, 50)
@@ -230,7 +232,9 @@ Partial Class EditingForm_ReliefValve
         'btnCreateAndConnectInlet1
         '
         Me.btnCreateAndConnectInlet1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        #If Not HEADLESS Then
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        #End If
         Me.btnCreateAndConnectInlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectInlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnCreateAndConnectInlet1.Location = New System.Drawing.Point(323, 23)
@@ -242,7 +246,9 @@ Partial Class EditingForm_ReliefValve
         'btnDisconnectOutlet1
         '
         Me.btnDisconnectOutlet1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        #If Not HEADLESS Then
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        #End If
         Me.btnDisconnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(350, 50)
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
@@ -254,7 +260,9 @@ Partial Class EditingForm_ReliefValve
         'btnDisconnect1
         '
         Me.btnDisconnect1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        #If Not HEADLESS Then
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        #End If
         Me.btnDisconnect1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnDisconnect1.Location = New System.Drawing.Point(350, 23)
         Me.btnDisconnect1.Name = "btnDisconnect1"
@@ -327,7 +335,9 @@ Partial Class EditingForm_ReliefValve
         'btnUtils
         '
         Me.btnUtils.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        #If Not HEADLESS Then
         Me.btnUtils.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_sparkle
+        #End If
         Me.btnUtils.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnUtils.Location = New System.Drawing.Point(349, 18)
         Me.btnUtils.Name = "btnUtils"
@@ -349,7 +359,9 @@ Partial Class EditingForm_ReliefValve
         '
         Me.chkActive.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+        #If Not HEADLESS Then
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        #End If
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.Location = New System.Drawing.Point(349, 43)
         Me.chkActive.Name = "chkActive"
@@ -425,7 +437,9 @@ Partial Class EditingForm_ReliefValve
         'btnConfigurePP
         '
         Me.btnConfigurePP.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        #If Not HEADLESS Then
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        #End If
         Me.btnConfigurePP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfigurePP.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnConfigurePP.Location = New System.Drawing.Point(349, 26)
@@ -465,14 +479,18 @@ Partial Class EditingForm_ReliefValve
         'AddUtilityTSMI
         '
         Me.AddUtilityTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sizingtsmi})
+        #If Not HEADLESS Then
         Me.AddUtilityTSMI.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        #End If
         Me.AddUtilityTSMI.Name = "AddUtilityTSMI"
         Me.AddUtilityTSMI.Size = New System.Drawing.Size(143, 22)
         Me.AddUtilityTSMI.Text = "Attach Utility"
         '
         'sizingtsmi
         '
+        #If Not HEADLESS Then
         Me.sizingtsmi.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        #End If
         Me.sizingtsmi.Name = "sizingtsmi"
         Me.sizingtsmi.Size = New System.Drawing.Size(277, 22)
         Me.sizingtsmi.Text = "Pressure Safety Valve Sizing/Evaluation"

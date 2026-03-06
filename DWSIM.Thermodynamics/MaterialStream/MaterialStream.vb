@@ -29,7 +29,6 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
-Imports System.Windows.Forms
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports System.Globalization
 Imports DWSIM.ExtensionMethods
@@ -51,7 +50,7 @@ Namespace Streams
 
         Implements Interfaces.IMaterialStream
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As MaterialStreamEditor
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As Object
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public _pp As PropertyPackages.PropertyPackage
 
@@ -6638,6 +6637,7 @@ Namespace Streams
             Validate()
         End Sub
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -6658,6 +6658,10 @@ Namespace Streams
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
@@ -6669,9 +6673,15 @@ Namespace Streams
 
         Public Property EditorState As String = "{}"
 
+        #If Not HEADLESS Then
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.material_stream
         End Function
+        #Else
+            Public Overrides Function GetIconBitmap() As Object
+                Return Nothing
+            End Function
+        #End If
 
         Public Overrides Function GetIconBitmapBytes() As Byte()
 

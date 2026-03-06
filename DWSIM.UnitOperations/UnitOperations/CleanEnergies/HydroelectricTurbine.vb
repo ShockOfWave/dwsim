@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
 Imports DWSIM.Interfaces.Enums
@@ -19,7 +19,9 @@ Namespace UnitOperations
 
         Private Image As SKImage
 
+#If Not HEADLESS Then
         <Xml.Serialization.XmlIgnore> Public f As EditingForm_HydroelectricTurbine
+#End If
 
         Public Overrides Property Prefix As String = "HT-"
 
@@ -59,7 +61,9 @@ Namespace UnitOperations
             If Image Is Nothing Then
 
                 ImagePath = SharedClasses.Utility.GetTempFileName()
+                #If Not HEADLESS Then
                 My.Resources.icons8_hydroelectric.Save(ImagePath)
+                #End If
 
                 Using streamBG = New FileStream(ImagePath, FileMode.Open)
                     Using bitmap = SKBitmap.Decode(streamBG)
@@ -206,6 +210,7 @@ Namespace UnitOperations
 
         End Function
 
+        #If Not HEADLESS Then
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
@@ -225,7 +230,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub DisplayEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub UpdateEditForm()
 
             If f IsNot Nothing Then
@@ -235,7 +245,12 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub UpdateEditForm()
+            End Sub
+        #End If
 
+        #If Not HEADLESS Then
         Public Overrides Sub CloseEditForm()
 
             If f IsNot Nothing Then
@@ -246,6 +261,10 @@ Namespace UnitOperations
             End If
 
         End Sub
+        #Else
+            Public Overrides Sub CloseEditForm()
+            End Sub
+        #End If
 
         Public Overrides Function ReturnInstance(typename As String) As Object
 
@@ -255,7 +274,9 @@ Namespace UnitOperations
 
         Public Overrides Function GetIconBitmap() As Object
 
+            #If Not HEADLESS Then
             Return My.Resources.icons8_hydroelectric
+            #End If
 
         End Function
 

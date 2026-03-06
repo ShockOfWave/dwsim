@@ -550,7 +550,7 @@ Namespace GraphicObjects
 
         End Function
 
-        Public Overridable Function GetIconAsBitmap() As System.Drawing.Bitmap Implements IGraphicObject.GetIconAsBitmap
+        Public Overridable Function GetIconAsBitmap() As Object Implements IGraphicObject.GetIconAsBitmap
 
             If EmbeddedResourceIconName <> "" Then
 

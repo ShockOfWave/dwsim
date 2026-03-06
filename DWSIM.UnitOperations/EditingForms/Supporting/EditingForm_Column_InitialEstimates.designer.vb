@@ -135,7 +135,9 @@ Partial Class EditingForm_Column_InitialEstimates
         'chkAutoUpdate
         '
         resources.ApplyResources(Me.chkAutoUpdate, "chkAutoUpdate")
+        #If Not HEADLESS Then
         Me.chkAutoUpdate.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lightning
+        #End If
         Me.chkAutoUpdate.Name = "chkAutoUpdate"
         Me.ToolTip1.SetToolTip(Me.chkAutoUpdate, resources.GetString("chkAutoUpdate.ToolTip"))
         Me.chkAutoUpdate.UseVisualStyleBackColor = True
@@ -143,7 +145,9 @@ Partial Class EditingForm_Column_InitialEstimates
         'Button4
         '
         resources.ApplyResources(Me.Button4, "Button4")
+        #If Not HEADLESS Then
         Me.Button4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disk
+        #End If
         Me.Button4.Name = "Button4"
         Me.ToolTip1.SetToolTip(Me.Button4, resources.GetString("Button4.ToolTip"))
         Me.Button4.UseVisualStyleBackColor = True
@@ -151,7 +155,9 @@ Partial Class EditingForm_Column_InitialEstimates
         'Button3
         '
         resources.ApplyResources(Me.Button3, "Button3")
+        #If Not HEADLESS Then
         Me.Button3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_rotate_clockwise
+        #End If
         Me.Button3.Name = "Button3"
         Me.ToolTip1.SetToolTip(Me.Button3, resources.GetString("Button3.ToolTip"))
         Me.Button3.UseVisualStyleBackColor = True
@@ -159,7 +165,9 @@ Partial Class EditingForm_Column_InitialEstimates
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
+        #If Not HEADLESS Then
         Me.Button1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.folder_page_white
+        #End If
         Me.Button1.Name = "Button1"
         Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.Button1.UseVisualStyleBackColor = True
@@ -254,35 +262,45 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        #End If
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.paste_plain
+        #End If
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'ToolStripButton5
         '
         resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        #End If
         Me.ToolStripButton5.Name = "ToolStripButton5"
         '
         'ToolStripButton6
         '
         resources.ApplyResources(Me.ToolStripButton6, "ToolStripButton6")
         Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock
+        #End If
         Me.ToolStripButton6.Name = "ToolStripButton6"
         '
         'ToolStripButton7
         '
         resources.ApplyResources(Me.ToolStripButton7, "ToolStripButton7")
         Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton7.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
+        #End If
         Me.ToolStripButton7.Name = "ToolStripButton7"
         '
         'ToolStripSeparator1
@@ -294,21 +312,27 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.ToolStripButton28, "ToolStripButton28")
         Me.ToolStripButton28.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton28.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.chart_line
+        #End If
         Me.ToolStripButton28.Name = "ToolStripButton28"
         '
         'ToolStripButton27
         '
         resources.ApplyResources(Me.ToolStripButton27, "ToolStripButton27")
         Me.ToolStripButton27.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton27.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.chart_line
+        #End If
         Me.ToolStripButton27.Name = "ToolStripButton27"
         '
         'ToolStripButton26
         '
         resources.ApplyResources(Me.ToolStripButton26, "ToolStripButton26")
         Me.ToolStripButton26.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton26.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.chart_line
+        #End If
         Me.ToolStripButton26.Name = "ToolStripButton26"
         '
         'ToolStripSeparator2
@@ -369,35 +393,45 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        #End If
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
         resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.paste_plain
+        #End If
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'ToolStripButton8
         '
         resources.ApplyResources(Me.ToolStripButton8, "ToolStripButton8")
         Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton8.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        #End If
         Me.ToolStripButton8.Name = "ToolStripButton8"
         '
         'ToolStripButton9
         '
         resources.ApplyResources(Me.ToolStripButton9, "ToolStripButton9")
         Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton9.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock
+        #End If
         Me.ToolStripButton9.Name = "ToolStripButton9"
         '
         'ToolStripButton10
         '
         resources.ApplyResources(Me.ToolStripButton10, "ToolStripButton10")
         Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton10.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
+        #End If
         Me.ToolStripButton10.Name = "ToolStripButton10"
         '
         'FaTabStripItem5
@@ -453,35 +487,45 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.ToolStripButton21, "ToolStripButton21")
         Me.ToolStripButton21.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton21.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        #End If
         Me.ToolStripButton21.Name = "ToolStripButton21"
         '
         'ToolStripButton22
         '
         resources.ApplyResources(Me.ToolStripButton22, "ToolStripButton22")
         Me.ToolStripButton22.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton22.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.paste_plain
+        #End If
         Me.ToolStripButton22.Name = "ToolStripButton22"
         '
         'ToolStripButton23
         '
         resources.ApplyResources(Me.ToolStripButton23, "ToolStripButton23")
         Me.ToolStripButton23.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton23.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        #End If
         Me.ToolStripButton23.Name = "ToolStripButton23"
         '
         'ToolStripButton24
         '
         resources.ApplyResources(Me.ToolStripButton24, "ToolStripButton24")
         Me.ToolStripButton24.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton24.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock
+        #End If
         Me.ToolStripButton24.Name = "ToolStripButton24"
         '
         'ToolStripButton25
         '
         resources.ApplyResources(Me.ToolStripButton25, "ToolStripButton25")
         Me.ToolStripButton25.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton25.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
+        #End If
         Me.ToolStripButton25.Name = "ToolStripButton25"
         '
         'FaTabStripItem3
@@ -505,35 +549,45 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.ToolStripButton11, "ToolStripButton11")
         Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton11.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        #End If
         Me.ToolStripButton11.Name = "ToolStripButton11"
         '
         'ToolStripButton12
         '
         resources.ApplyResources(Me.ToolStripButton12, "ToolStripButton12")
         Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton12.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.paste_plain
+        #End If
         Me.ToolStripButton12.Name = "ToolStripButton12"
         '
         'ToolStripButton13
         '
         resources.ApplyResources(Me.ToolStripButton13, "ToolStripButton13")
         Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton13.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        #End If
         Me.ToolStripButton13.Name = "ToolStripButton13"
         '
         'ToolStripButton14
         '
         resources.ApplyResources(Me.ToolStripButton14, "ToolStripButton14")
         Me.ToolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton14.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock
+        #End If
         Me.ToolStripButton14.Name = "ToolStripButton14"
         '
         'ToolStripButton15
         '
         resources.ApplyResources(Me.ToolStripButton15, "ToolStripButton15")
         Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton15.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
+        #End If
         Me.ToolStripButton15.Name = "ToolStripButton15"
         '
         'DataGridView1
@@ -610,35 +664,45 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.ToolStripButton16, "ToolStripButton16")
         Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton16.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        #End If
         Me.ToolStripButton16.Name = "ToolStripButton16"
         '
         'ToolStripButton17
         '
         resources.ApplyResources(Me.ToolStripButton17, "ToolStripButton17")
         Me.ToolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton17.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.paste_plain
+        #End If
         Me.ToolStripButton17.Name = "ToolStripButton17"
         '
         'ToolStripButton18
         '
         resources.ApplyResources(Me.ToolStripButton18, "ToolStripButton18")
         Me.ToolStripButton18.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton18.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        #End If
         Me.ToolStripButton18.Name = "ToolStripButton18"
         '
         'ToolStripButton19
         '
         resources.ApplyResources(Me.ToolStripButton19, "ToolStripButton19")
         Me.ToolStripButton19.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton19.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock
+        #End If
         Me.ToolStripButton19.Name = "ToolStripButton19"
         '
         'ToolStripButton20
         '
         resources.ApplyResources(Me.ToolStripButton20, "ToolStripButton20")
         Me.ToolStripButton20.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        #If Not HEADLESS Then
         Me.ToolStripButton20.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
+        #End If
         Me.ToolStripButton20.Name = "ToolStripButton20"
         '
         'DataGridView2

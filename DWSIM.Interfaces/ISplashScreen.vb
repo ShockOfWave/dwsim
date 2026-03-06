@@ -18,6 +18,6 @@
 
 Public Interface ISplashScreen
 
-    Function GetSplashScreen() As System.Windows.Forms.Form
+    Function GetSplashScreen() As Object
 
 End Interface

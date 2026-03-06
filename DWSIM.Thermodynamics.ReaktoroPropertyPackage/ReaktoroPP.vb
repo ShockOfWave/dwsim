@@ -23,7 +23,6 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
-Imports System.Windows.Forms
 
 <System.Runtime.InteropServices.Guid(ReaktoroPropertyPackage.ClassId)>
 <System.Serializable()> Public Class ReaktoroPropertyPackage
@@ -56,19 +55,23 @@ Imports System.Windows.Forms
 
     End Function
 
+    #If Not HEADLESS Then
     Public Overrides Sub DisplayEditingForm()
 
         Dim f As New FormConfig
         f.Show()
 
     End Sub
+    #End If
 
+    #If Not HEADLESS Then
     Public Overrides Function GetEditingForm() As Form
 
         Dim f As New FormConfig
         Return f
 
     End Function
+    #End If
 
 #Region "    DWSIM Functions"
 

@@ -391,9 +391,9 @@ Public Class XMLSerializer
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
                                 .Add(New XElement(prop.Name, ArrayToString(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Single Then
-                                .Add(New XElement(prop.Name, Single.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString("R", ci)))
+                                .Add(New XElement(prop.Name, Convert.ToSingle(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Double Then
-                                .Add(New XElement(prop.Name, Double.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString("R", ci)))
+                                .Add(New XElement(prop.Name, Convert.ToDouble(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nullable(Of Double) Then
                                 .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Nullable(Of Double)).GetValueOrDefault.ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nullable(Of Single) Then
@@ -536,7 +536,7 @@ Public Class XMLSerializer
 
             For Each obj As Object In sourcearray
                 If TypeOf obj Is Double Then
-                    sb += Double.Parse(obj).ToString("R", ci) + ","
+                    sb += Convert.ToDouble(obj).ToString("R", ci) + ","
                 Else
                     sb += obj.ToString + ","
                 End If
@@ -559,7 +559,7 @@ Public Class XMLSerializer
 
                 For Each obj As Object In sourcearray
                     If TypeOf obj Is Double Then
-                        sb += Double.Parse(obj).ToString("R", ci) + ","
+                        sb += Convert.ToDouble(obj).ToString("R", ci) + ","
                     Else
                         sb += obj.ToString + ","
                     End If

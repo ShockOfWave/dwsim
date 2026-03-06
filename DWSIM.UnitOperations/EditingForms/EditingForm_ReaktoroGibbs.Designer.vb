@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_ReaktoroGibbs
 
     'Form overrides dispose to clean up the component list.
@@ -301,7 +301,9 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         Me.chkActive.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+        #If Not HEADLESS Then
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        #End If
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.Location = New System.Drawing.Point(390, 43)
         Me.chkActive.Name = "chkActive"
@@ -542,7 +544,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button6.AutoSize = True
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        #If Not HEADLESS Then
         Me.Button6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources._new
+        #End If
         Me.Button6.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Button6.Location = New System.Drawing.Point(341, 84)
         Me.Button6.Name = "Button6"
@@ -556,7 +560,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button5.AutoSize = True
         Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        #If Not HEADLESS Then
         Me.Button5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.information
+        #End If
         Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Button5.Location = New System.Drawing.Point(369, 84)
         Me.Button5.Name = "Button5"
@@ -641,7 +647,9 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         Me.btnConfigurePP.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnConfigurePP.AutoSize = True
+        #If Not HEADLESS Then
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        #End If
         Me.btnConfigurePP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfigurePP.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnConfigurePP.Location = New System.Drawing.Point(369, 152)

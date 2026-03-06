@@ -1,5 +1,4 @@
 ﻿using DWSIM.Interfaces;
-using DWSIM.SharedClassesCSharp.FilePicker.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +19,7 @@ namespace DWSIM.SharedClassesCSharp.FilePicker
         }
 
 
-        private Func<IFilePicker> _filePickerFactory = () => new WindowsFilePicker();
+        private Func<IFilePicker> _filePickerFactory = () => null; // WindowsFilePicker excluded in headless mode
         public void SetFilePickerFactory(Func<IFilePicker> filePickerFactory)
         {
             _filePickerFactory = filePickerFactory;
